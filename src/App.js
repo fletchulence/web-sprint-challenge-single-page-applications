@@ -24,7 +24,7 @@ const initialFormVals = {
 
 const initialFormErrors = {
   name: '',
-  size: ''
+  size: '',
   // submitBtn: ''
   
 }
@@ -40,7 +40,8 @@ const App = () => {
 
   //ERRORS
   const validate = (name, value) =>{
-    yup.reach(schema, name).validate(value)
+    yup.reach(schema, name)
+      .validate(value)
       .then(() => {
         setFormErrors({ ...formErrors, [name]: ''})
       })
