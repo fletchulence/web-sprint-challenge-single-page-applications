@@ -10,7 +10,7 @@ const PizzaForm = (props) =>{
    // console.log(formVals)
 
    const onChange = (evt) =>{
-      const { name, value, checked, type } = evt.target
+      const { name, value, checked, type } = evt.target;
       const valueToUse = type ==='checkbox' ? checked : value;
 
       updateForm( name, valueToUse)

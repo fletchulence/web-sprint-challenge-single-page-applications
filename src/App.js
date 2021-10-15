@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from 'react-router-dom';
 import styled from "styled-components"; //? may not use this here, but good to note
 import axios from "axios";
+import * as yup from 'yup';
+import schema from './validation/formSchema'
 
 //component imports
 import Header from "./components/Header";
@@ -20,13 +22,34 @@ const initialFormVals = {
   special: '',
 }
 
+const initialFormErrors = {
+  name: '',
+  size: ''
+  // submitBtn: ''
+  
+}
 
 
 const App = () => {
   const [ pizzaOrder, setPizzaOrder ] = useState([]);
-  const [ formVals, setFormVals ] = useState(initialFormVals) //initial form vals which we dont know yet
+  const [ formVals, setFormVals ] = useState(initialFormVals) 
+  const [ formErrors, setFormErrors ] = useState(initialFormErrors)
+
+  //ERRORS
+  const validate = (name, value) =>{
+    yup.reach(schema, name).validate(value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [name]: ''})
+      })
+      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]})
+      )
+  }
+  
 
   const updateForm = (inputName, inputVal) =>{
+    //errors onChange
+    validate(inputName, inputVal)
+    //formVals onChange
     setFormVals({ ...formVals, [inputName]: inputVal})
   }
 
@@ -60,8 +83,11 @@ const App = () => {
     }
     
     
+
+
+    //TODO: set disabled
     // useEffect(() =>{
-    //! for the disabled form submit
+    //!for the disabled form submit
     // }, [])
 
     return (
@@ -76,6 +102,7 @@ const App = () => {
           formVals={formVals}
           submitForm={submitForm}
           updateForm={updateForm}
+          formErrors={formErrors}
         />
       </Route>
     </>

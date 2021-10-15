@@ -1,5 +1,12 @@
 import * as yup from "yup";
 
+// const toppings = {
+//    pepperoni,
+//    olives,
+//    chicken,
+//    pineapple
+// }
+
 const formSchema = yup.object().shape({
    name: yup
       .string()
@@ -11,7 +18,11 @@ const formSchema = yup.object().shape({
       .oneOf(['small', 'medium', 'large'], ' please select a size for you Za'),
    // submitBtn: yup
    //    .string()
+   
+   /* toppings.map((top, index)=>{
 
+   })
+ */
 
 })
 
