@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import PizzaForm from './components/PizzaForm';
 
 const initialFormVals = {
-  name:'',
+  name: '',
   size: '',
   //toppings
   pepperoni: false,
@@ -24,7 +24,10 @@ const App = () => {
   const [ pizzaOrder, setPizzaOrder ] = useState([]);
   const [ formVals, setFormVals ] = useState(initialFormVals) //initial form vals which we dont know yet
 
-  
+  const updateForm = (inputName, inputVal) =>{
+    setFormVals({ ...formVals, [inputName]: inputVal})
+  }
+
   const submitForm = () =>{
     const newOrder={
       //text

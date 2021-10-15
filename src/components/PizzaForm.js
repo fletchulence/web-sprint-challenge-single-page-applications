@@ -7,6 +7,8 @@ import React from "react";
 const PizzaForm = (props) =>{
    const { formVals, updateForm, submitForm } = props;
 
+   console.log(formVals)
+
    const onChange = (evt) =>{
       const { name, value, checked, type } = evt.target
       const valueToUse = type ==='checkbox' ? checked : value;
@@ -49,11 +51,11 @@ const PizzaForm = (props) =>{
                   type='checkbox'
                   name='pepperoni'
                   onChange={onChange}
-                  checked={formVals.name}
+                  checked={formVals.pepperoni}
                   />
             </label> pepperoni
             <label>
-               <p> what happens now ?</p>
+               {/* <p> what happens now ?</p> //! this leads to a large area to click - if that's what you want then great but idk why you would for a pizza*/}
                <input
                   type='checkbox'
                   name='olives'
@@ -83,6 +85,9 @@ const PizzaForm = (props) =>{
          <label> Special Instructions
             <input id='special-text'
                type='text'
+               name='special'
+               onChange={onChange}
+               value={formVals.special}
             />
          </label>
          <label>
