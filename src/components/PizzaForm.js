@@ -91,8 +91,11 @@ const PizzaForm = (props) =>{
             />
          </label>
          
+         
          <div className='errors'>
             <div>{formErrors.name}</div>
+            <div>{formErrors.size}</div>
+            <div>{formErrors.special}</div>
          </div>
 
 

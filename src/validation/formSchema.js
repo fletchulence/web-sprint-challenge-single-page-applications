@@ -17,7 +17,7 @@ const formSchema = yup.object().shape({
    pineapple: yup.boolean(),
    special: yup
       .string()
-      .max(50, 'please keep your response below 50 characters')
+      .max(50, 'please keep your response below 50 characters'),
 
 })
 

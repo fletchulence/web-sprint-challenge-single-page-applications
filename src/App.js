@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
 import styled from "styled-components"; //? may not use this here, but good to note
 import axios from "axios";
@@ -77,7 +78,6 @@ const App = () => {
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
       .then(res=>{
-         console.log(res.data)
         setPizzaOrder(res.data)
       })
       .catch(err=>{
@@ -99,7 +99,7 @@ const App = () => {
     }, [formVals])
 
     return (
-    <>
+    <div className="App">
       <h1>Lambda Eats</h1>
       <Header/>
       <Route exact path='/'>
@@ -113,7 +113,7 @@ const App = () => {
           formErrors={formErrors}
         />
       </Route>
-    </>
+    </div>
   );
 };
 export default App;
