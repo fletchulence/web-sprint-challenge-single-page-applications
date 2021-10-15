@@ -7,6 +7,7 @@ import axios from "axios";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import PizzaForm from './components/PizzaForm';
+// import schema from
 
 const initialFormVals = {
   name: '',
@@ -17,8 +18,9 @@ const initialFormVals = {
   chicken: false,
   pineapple: false,
   special: '',
-
 }
+
+
 
 const App = () => {
   const [ pizzaOrder, setPizzaOrder ] = useState([]);
@@ -49,7 +51,7 @@ const App = () => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
       .then(res=>{
          console.log(res.data)
-        // setPizzaOrder(res.data)
+        setPizzaOrder(res.data)
       })
       .catch(err=>{
         console.error(err)
@@ -67,14 +69,13 @@ const App = () => {
       <h1>Lambda Eats</h1>
       <Header/>
       <Route exact path='/'>
-        <Home/>
+        <Home pizza={pizzaOrder}/>
       </Route>
       <Route path='/pizza'>
         <PizzaForm
           formVals={formVals}
           submitForm={submitForm}
           updateForm={updateForm}
-
         />
       </Route>
     </>

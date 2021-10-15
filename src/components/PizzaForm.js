@@ -7,7 +7,7 @@ import React from "react";
 const PizzaForm = (props) =>{
    const { formVals, updateForm, submitForm } = props;
 
-   console.log(formVals)
+   // console.log(formVals)
 
    const onChange = (evt) =>{
       const { name, value, checked, type } = evt.target
@@ -46,7 +46,7 @@ const PizzaForm = (props) =>{
          </label>
 
          <div className='toppings'>
-            <label> what hhappens
+            <label> {/* what hhappens */}
                <input
                   type='checkbox'
                   name='pepperoni'
@@ -90,6 +90,7 @@ const PizzaForm = (props) =>{
                value={formVals.special}
             />
          </label>
+         
          <label>
             <input id='order-button' type='submit'/>
          </label>
