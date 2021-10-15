@@ -8,7 +8,7 @@ const PizzaForm = (props) =>{
 
    const onSubmit = (evt) =>{
       evt.preventDefault()
-      
+
    }
 
    return(
@@ -18,7 +18,7 @@ const PizzaForm = (props) =>{
                type='text'
             />
          </label>
-         <label>
+         <label> select a size
             <select id='size-dropdown'
                name='size'
             >
@@ -27,6 +27,37 @@ const PizzaForm = (props) =>{
              <option value='medium'> Medium </option>  
              <option value='Large'> Large </option>  
             </select>
+         </label>
+
+         <div className='toppings'>
+            <label> what hhappens
+               <input
+                  type='checkbox'
+               />
+            </label> pepperoni
+            <label>
+               <p> what happens now ?</p>
+               <input
+                  type='checkbox'
+               />
+            </label> olives
+            <label>
+               <input
+                  type='checkbox'
+               />
+            </label> chicken
+            <label>
+               <input
+                  type='checkbox'
+               />
+            </label> pinneaple
+
+         </div>
+
+         <label> Special Instructions
+            <input id='special-text'
+               type='text'
+            />
          </label>
          <label>
             <input id='order-button' type='submit'/>
