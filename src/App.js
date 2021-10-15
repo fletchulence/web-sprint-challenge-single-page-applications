@@ -4,6 +4,8 @@ import styled from "styled-components"; //? may not use this here, but good to n
 
 //component imports
 import Header from "./components/Header";
+import Home from "./components/Home";
+import PizzaForm from './components/PizzaForm';
 
 const initialFormVals = {
   name:'',
@@ -28,6 +30,12 @@ const App = () => {
     <>
       <h1>Lambda Eats</h1>
       <Header/>
+      <Route exact path='/'>
+        <Home/>
+      </Route>
+      <Route path='/pizza'>
+        <PizzaForm/>
+      </Route>
     </>
   );
 };
