@@ -3,14 +3,16 @@ import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
 import styled from "styled-components"; //? may not use this here, but good to note
 import axios from "axios";
-import * as yup from 'yup';
-import schema from './validation/formSchema'
 
 //component imports
 import Header from "./components/Header";
 import Home from "./components/Home";
 import PizzaForm from './components/PizzaForm';
-// import schema from
+import Cart from './components/Cart';
+
+// import schema
+import * as yup from 'yup';
+import schema from './validation/formSchema'
 
 const initialFormVals = {
   name: '',
@@ -104,6 +106,9 @@ const App = () => {
       <Header/>
       <Route exact path='/'>
         <Home pizza={pizzaOrder}/>
+      </Route>
+      <Route path='/cart'>
+        <Cart pizza={pizzaOrder}/>
       </Route>
       <Route path='/pizza'>
         <PizzaForm
