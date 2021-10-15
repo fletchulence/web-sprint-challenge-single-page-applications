@@ -29,11 +29,14 @@ const initialFormErrors = {
   
 }
 
+const initialDisabled = true;
+
 
 const App = () => {
   const [ pizzaOrder, setPizzaOrder ] = useState([]);
   const [ formVals, setFormVals ] = useState(initialFormVals) 
   const [ formErrors, setFormErrors ] = useState(initialFormErrors)
+  const [ disabled, setDisabled ] = useState(initialDisabled)
 
   //ERRORS
   const validate = (name, value) =>{
@@ -86,9 +89,13 @@ const App = () => {
 
 
     //TODO: set disabled
-    // useEffect(() =>{
+    useEffect(() =>{
     //!for the disabled form submit
-    // }, [])
+      schema.isValid(formVals)
+      .then(valid =>{
+        setDisabled(!valid)
+      })
+    }, [formVals])
 
     return (
     <>
