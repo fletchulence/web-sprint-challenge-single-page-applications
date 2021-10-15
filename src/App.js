@@ -25,24 +25,41 @@ const App = () => {
   const [ formVals, setFormVals ] = useState(initialFormVals) //initial form vals which we dont know yet
 
   
-  // useEffect(() =>{
-  //! for the disabled form submit
-  // }, [])
+  const submitForm = () =>{
+    const newOrder={
+      //text
+      name: formVals.name.trim(),
+      //dropdown
+      size: formVals.size,
+      //toppings
+      pepperoni: formVals.pepperoni,
+      olives: formVals.olives,
+      chicken: formVals.chicken,
+      pineapple: formVals.pineapple,
+      //text for special instructinos
+      special: formVals.special.trim(),
+    }
+    postNewOrder(newOrder)
+  }
   
-  // const postNewOrder = (newOrder) => {
-  //   axios.post(`https://reqres.in/api/orders`, newOrder)
-  //     .then(res=>{
-  //       console.log(res)
-  //     })
-  //     .catch(err=>{
-  //       console.error(err)
-  //     })
-  //     .finally(() => setFormVals(initialFormVals))
-  // }
+  const postNewOrder = (newOrder) => {
+    axios.post(`https://reqres.in/api/orders`, newOrder)
+      .then(res=>{
+         console.log(res.data)
+        // setPizzaOrder(res.data)
+      })
+      .catch(err=>{
+        console.error(err)
+      })
+      .finally(() => setFormVals(initialFormVals))
+    }
+    
+    
+    // useEffect(() =>{
+    //! for the disabled form submit
+    // }, [])
 
-  
-
-  return (
+    return (
     <>
       <h1>Lambda Eats</h1>
       <Header/>
@@ -50,7 +67,12 @@ const App = () => {
         <Home/>
       </Route>
       <Route path='/pizza'>
-        <PizzaForm/>
+        <PizzaForm
+          formVals={formVals}
+          submitForm={submitForm}
+          updateForm={updateForm}
+
+        />
       </Route>
     </>
   );
