@@ -37,31 +37,20 @@ const initialDisabled = true;
 
 const App = () => {
   const [ pizzaOrder, setPizzaOrder ] = useState([]);
-  const [ formVals, setFormVals ] = useState(initialFormVals) 
-  const [ formErrors, setFormErrors ] = useState(initialFormErrors)
-  const [ disabled, setDisabled ] = useState(initialDisabled)
+  const [ formVals, setFormVals ] = useState(initialFormVals); 
+  const [ formErrors, setFormErrors ] = useState(initialFormErrors);
+  const [ disabled, setDisabled ] = useState(initialDisabled);
 
-  //ERRORS
-  const validate = (name, value) =>{
-    yup.reach(schema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({ ...formErrors, [name]: ''})
-      })
-      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]})
-      )
-  }
   
-
   const updateForm = (inputName, inputVal) =>{
     //errors onChange
     validate(inputName, inputVal)
     //formVals onChange
     setFormVals({ ...formVals, [inputName]: inputVal})
   }
-
+  
   const submitForm = () =>{
-    const newOrder={
+    const newOrder = {
       //text
       name: formVals.name.trim(),
       //dropdown
@@ -79,36 +68,52 @@ const App = () => {
   
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
-      .then(res=>{
-        setPizzaOrder(res.data)
+    .then(res=>{
+      setPizzaOrder([res.data, ...pizzaOrder])
+    })
+    .catch(err=>{
+      console.error(err)
+    })
+    .finally(() => {
+      console.log('you are screwed')
+      // setFormVals(initialFormVals)
+    })
+  }
+  
+  
+  //ERRORS
+  const validate = (name, value) =>{
+    yup.reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [name]: ''})
       })
-      .catch(err=>{
-        console.error(err)
-      })
-      .finally(() => setFormVals(initialFormVals))
-    }
-    
-    
-
-
+      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]})
+      )
+  }
+  
     //TODO: set disabled
-    useEffect(() =>{
-    //!for the disabled form submit
-      schema.isValid(formVals)
-      .then(valid =>{
-        setDisabled(!valid)
-      })
-    }, [formVals])
+  useEffect(() =>{
+  //!for the disabled form submit
+    schema.isValid(formVals)
+    .then(valid =>{
+      setDisabled(!valid)
+    })
+  }, [formVals])
 
     return (
     <div className="App">
       <h1>Lambda Eats</h1>
       <Header/>
       <Route exact path='/'>
-        <Home pizza={pizzaOrder}/>
+        <Home />
       </Route>
       <Route path='/cart'>
-        <Cart pizza={pizzaOrder}/>
+        {pizzaOrder &&
+          pizzaOrder.map((pizza, index) =>{
+            return <Cart key={index} pizza={pizza}/>
+          })
+        }
       </Route>
       <Route path='/pizza'>
         <PizzaForm
@@ -116,6 +121,7 @@ const App = () => {
           submitForm={submitForm}
           updateForm={updateForm}
           formErrors={formErrors}
+          disabled={disabled}
         />
       </Route>
     </div>

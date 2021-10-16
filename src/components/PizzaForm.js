@@ -13,12 +13,12 @@ const PizzaForm = (props) =>{
       const { name, value, checked, type } = evt.target;
       const valueToUse = type ==='checkbox' ? checked : value;
 
-      updateForm( name, valueToUse)
+      updateForm(name, valueToUse)
    }
 
    const onSubmit = (evt) =>{
       evt.preventDefault()
-      submitForm()
+      submitForm(formVals)
    }
 
    return(
@@ -41,7 +41,7 @@ const PizzaForm = (props) =>{
              <option value=''> Select a Pizza Size </option>  
              <option value='small'> Small </option>  
              <option value='medium'> Medium </option>  
-             <option value='Large'> Large </option>  
+             <option value='large'> Large </option>  
             </select>
          </label>
 
