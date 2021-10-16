@@ -64,29 +64,32 @@ const App = () => {
       //text for special instructinos
       special: formVals.special.trim(),
     }
-    console.log(newOrder)
+    // console.log(newOrder)
     postNewOrder(newOrder)
   }
 
-  
+  // useEffect(() =>{
+  //   getPizza()
+  // }, [])  //! MAY HAVE TO DO THIS
+
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
-      console.log(res.data)
-      setPizzaOrder([res.data, ...pizzaOrder])
+      // console.log(res.data)
+      setPizzaOrder([...pizzaOrder, res.data])
     })
-    .catch(err=>{
+    .catch(err => {
       console.error(err)
     })
     .finally(() => {
       // console.log('you are screwed')
-      // setFormVals(initialFormVals)
+       setFormVals(initialFormVals)
     })
   }
   
   
   //ERRORS
-  const validate = (name, value) =>{
+  const validate = (name, value) => {
     yup.reach(schema, name)
       .validate(value)
       .then(() => {
@@ -95,15 +98,16 @@ const App = () => {
       .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]})
       )
   }
-  
+
     //TODO: set disabled
-  useEffect(() =>{
-  //!for the disabled form submit
-    schema.isValid(formVals)
-    .then(valid =>{
-      setDisabled(!valid)
-    })
-  }, [formVals])
+    //!for the disabled form submit
+    useEffect(() => {
+      schema.isValid(formVals)
+      .then(valid =>{
+        setDisabled(!valid)
+      })
+      .finally(() => ('cleaning'))
+    }, [formVals])
 
     return (
     <div className="App">

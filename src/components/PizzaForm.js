@@ -23,7 +23,7 @@ const PizzaForm = (props) =>{
 
    return(
       <form id='pizza-form' onSubmit={onSubmit}>
-         <label>
+         <label> Name: &nbsp;
             <input id='name-input'
                type='text'
                name='name'
@@ -31,7 +31,7 @@ const PizzaForm = (props) =>{
                onChange={onChange}
             />
          </label>
-         <label> select a size
+         <label> Select a Size:&nbsp;
             <select id='size-dropdown'
                // doesnt take a type
                name='size'
@@ -52,8 +52,8 @@ const PizzaForm = (props) =>{
                   name='pepperoni'
                   onChange={onChange}
                   checked={formVals.pepperoni}
-                  />
-            </label> pepperoni
+                  /> pepperoni
+            </label> 
             <label>
                {/* <p> what happens now ?</p> // this leads to a large area to click - if that's what you want then great but idk why you would for a pizza */}
                <input
@@ -102,7 +102,7 @@ const PizzaForm = (props) =>{
 
 
          <label>
-            <button id='order-button' type='submit' name='submitBtn' disabled={disabled}>Add to Order</button>
+            <button to='/cart' id='order-button' type='submit' name='submitBtn' disabled={disabled}>Add to Order</button>
          </label>
       </form>
    )
