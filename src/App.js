@@ -113,7 +113,7 @@ const App = () => {
           pizzaOrder.map((pizza, index) =>{
             return <Cart key={index} pizza={pizza}/>
           })
-        }
+        }{/* map though everything but the names */}
       </Route>
       <Route path='/pizza'>
         <PizzaForm

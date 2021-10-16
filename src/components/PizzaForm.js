@@ -5,7 +5,7 @@
 import React from "react";
 
 const PizzaForm = (props) =>{
-   const { formVals, updateForm, submitForm, formErrors } = props;
+   const { formVals, updateForm, submitForm, formErrors, disabled } = props;
 
    // console.log(formVals)
 
@@ -100,7 +100,7 @@ const PizzaForm = (props) =>{
 
 
          <label>
-            <button id='order-button' type='submit' name='submitBtn'>Add to Order</button>
+            <button id='order-button' type='submit' name='submitBtn' disabled={disabled}>Add to Order</button>
          </label>
       </form>
    )
