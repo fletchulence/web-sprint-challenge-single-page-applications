@@ -46,7 +46,7 @@ const PizzaForm = (props) =>{
          </label>
 
          <div className='toppings'>
-            <label> {/* what hhappens */}
+            <label> 
                <input
                   type='checkbox'
                   name='pepperoni'
@@ -55,7 +55,7 @@ const PizzaForm = (props) =>{
                   />
             </label> pepperoni
             <label>
-               {/* <p> what happens now ?</p> //! this leads to a large area to click - if that's what you want then great but idk why you would for a pizza*/}
+               {/* <p> what happens now ?</p> // this leads to a large area to click - if that's what you want then great but idk why you would for a pizza */}
                <input
                   type='checkbox'
                   name='olives'
@@ -95,6 +95,8 @@ const PizzaForm = (props) =>{
          <div className='errors'>
             <div>{formErrors.name}</div>
             <div>{formErrors.size}</div>
+            <div>{formErrors.chicken}</div>
+            <div>{formErrors.pepperoni}</div>
             <div>{formErrors.special}</div>
          </div>
 

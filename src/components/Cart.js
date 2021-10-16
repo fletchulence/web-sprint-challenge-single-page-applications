@@ -1,18 +1,26 @@
 import React from "react";
 
 export default function Cart (props) {
-
-   console.log(props)
+   const { pizza } = props
 
    return(
-      <div>
-         <p>{props.pizza.name}</p>
-         <p>{props.pizza.size}</p>
-         <p>{props.pizza.pepperoni}</p>
-         <p>{props.pizza.olives}</p>
-         <p>{props.pizza.chicken}</p>
-         <p>{props.pizza.pineapple}</p>
-         <p>{props.pizza.special}</p>
+      <div className='myCart'>
+         <p>{pizza.name}</p>
+         <p>{pizza.size}</p>
+
+         {
+            !!pizza.toppings && !!pizza.toppings.length &&
+            <div>
+               Toppings:
+               <ul>
+                  {pizza.toppings.map((topgs, idx) => (
+                     <li key={idx}> {topgs} </li>
+                  ))}
+               </ul>
+            </div>
+         }
+
+         <p>{pizza.special}</p>
       </div>
    )
 }

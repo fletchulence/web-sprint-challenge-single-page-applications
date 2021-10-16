@@ -56,26 +56,30 @@ const App = () => {
       //dropdown
       size: formVals.size,
       //toppings
-      pepperoni: formVals.pepperoni,
-      olives: formVals.olives,
-      chicken: formVals.chicken,
-      pineapple: formVals.pineapple,
+      toppings: [
+        'pepperoni', 
+        'olives', 
+        'chicken', 
+        'pineapple'].filter(tops => !!formVals[tops]),
       //text for special instructinos
       special: formVals.special.trim(),
     }
+    console.log(newOrder)
     postNewOrder(newOrder)
   }
+
   
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
+      console.log(res.data)
       setPizzaOrder([res.data, ...pizzaOrder])
     })
     .catch(err=>{
       console.error(err)
     })
     .finally(() => {
-      console.log('you are screwed')
+      // console.log('you are screwed')
       // setFormVals(initialFormVals)
     })
   }
@@ -113,7 +117,7 @@ const App = () => {
           pizzaOrder.map((pizza, index) =>{
             return <Cart key={index} pizza={pizza}/>
           })
-        }{/* map though everything but the names */}
+        }{/* map though everything but the names ??*/}
       </Route>
       <Route path='/pizza'>
         <PizzaForm
