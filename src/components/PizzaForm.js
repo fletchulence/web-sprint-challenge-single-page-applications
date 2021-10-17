@@ -102,7 +102,7 @@ const PizzaForm = (props) =>{
 
 
          <label>
-            <button to='/cart' id='order-button' type='submit' name='submitBtn' disabled={disabled}>Add to Order</button>
+            <button id='order-button' type='submit' name='submitBtn' disabled={disabled}> Add to Order </button>
          </label>
       </form>
    )

@@ -75,7 +75,7 @@ const App = () => {
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
-      // console.log(res.data)
+      console.log(res.data)
       setPizzaOrder([...pizzaOrder, res.data])
     })
     .catch(err => {
@@ -117,11 +117,6 @@ const App = () => {
         <Home />
       </Route>
       <Route path='/cart'>
-        {pizzaOrder &&
-          pizzaOrder.map((pizza, index) =>{
-            return <Cart key={index} pizza={pizza}/>
-          })
-        }{/* map though everything but the names ??*/}
       </Route>
       <Route path='/pizza'>
         <PizzaForm
@@ -130,7 +125,15 @@ const App = () => {
           updateForm={updateForm}
           formErrors={formErrors}
           disabled={disabled}
-        />
+          />
+          {pizzaOrder &&
+            pizzaOrder.map(pizza =>{
+              return <Cart key={pizza.id} pizza={pizza}/>
+            })
+          }
+          
+          
+          {/* map though everything but the names ??*/}
       </Route>
     </div>
   );

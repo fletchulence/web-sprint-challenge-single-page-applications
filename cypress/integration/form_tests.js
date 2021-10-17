@@ -4,11 +4,11 @@ describe('Lambda Eats App', () =>{
       cy.visit('http://localhost:3000/pizza')
    })
 
-   const nameInput = () => cy.get('input[id=name-input]');
-   const specialT = () => cy.get('input[id=special-text]');
-   const sizeDrop = () => cy.get('select[id=size-dropdown]');
+   const nameInput = () => cy.get('input[id="name-input"]');
+   const specialT = () => cy.get('input[id="special-text"]');
+   const sizeDrop = () => cy.get('select[id="size-dropdown"]');
    // const toppings = () => cy.get('div[class=toppings]');
-   const submitBtn = () => cy.get('button[id=order-submit]');
+   const submitBtn = () => cy.get('button[id="order-button"]');
 
    it('sanity check', () => {
       expect(1 + 2).to.equal(3)
@@ -64,7 +64,7 @@ describe('Lambda Eats App', () =>{
       })
    })
    
-   describe('Form should submit', () =>{
+   describe('Form should submit when proper things are filled', () =>{
       it('Submit button is disabled without Name and Size filled', () => {
          submitBtn().should('be.disabled');
          specialT().type('gluten free');
@@ -83,6 +83,18 @@ describe('Lambda Eats App', () =>{
          submitBtn().should('not.be.disabled')
          sizeDrop().select('Medium')
          submitBtn().should('not.be.disabled')
+      })
+      it('all from Elements Submit', () => {
+         nameInput().type('david fletcher');
+         cy.get('input[name=pepperoni]').check();
+         cy.get('input[name=olives]').check();
+         cy.get('input[name=chicken]').check();
+         cy.get('input[name=pineapple]').check();
+         sizeDrop().select('Small')
+         specialT().type('add hot honey please');
+         submitBtn().click();
+         
+         cy.contains('david fletcher').should('exist')
       })
    })
 
