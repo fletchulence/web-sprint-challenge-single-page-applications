@@ -7,17 +7,16 @@ const formSchema = yup.object().shape({
       .min(2, 'name must be at least 2 characters'),
    size: yup
       .string()
-      .required()
-      .oneOf(['small', 'medium', 'large'], ' please select a size for you Za'),
+      .oneOf(['small', 'medium', 'large'], ' we need to know what size'),
    // submitBtn: yup
-   //    .string()
+   //    .string() 
    pepperoni: yup.boolean(),
    olives: yup.boolean(),
    chicken: yup.boolean(),
    pineapple: yup.boolean(),
    special: yup
       .string()
-      .max(70, 'please keep your response below 50 characters'),
+      .max(70, 'please keep your special requests below 50 characters'),
 
 })
 

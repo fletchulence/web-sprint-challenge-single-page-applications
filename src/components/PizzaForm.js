@@ -94,7 +94,8 @@ const PizzaForm = (props) =>{
          
          
          <div className='errors'>
-            <div>{formErrors.name}</div>
+         {disabled ? <div>{formErrors.name}</div> : null}
+            {/* <div>{formErrors.name}</div> */}
             <div>{formErrors.size}</div>
             <div>{formErrors.chicken}</div>
             <div>{formErrors.pepperoni}</div>
@@ -102,13 +103,13 @@ const PizzaForm = (props) =>{
          </div>
 
 
-            <button 
-               id='order-button' 
-               type='submit' 
-               name='submitBtn' 
-               disabled={disabled}
-               onClick={() =>{<Link to='/cart'/>}}
-               > Add to Order </button>
+         <button 
+            id='order-button' 
+            type='submit' 
+            name='submitBtn' 
+            disabled={disabled}
+            > Add to Order 
+         </button>
          
       </form>
    )

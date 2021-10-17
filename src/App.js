@@ -41,7 +41,7 @@ const App = () => {
   const [ formErrors, setFormErrors ] = useState(initialFormErrors);
   const [ disabled, setDisabled ] = useState(initialDisabled);
 
-  
+  //onChange
   const updateForm = (inputName, inputVal) =>{
     //errors onChange
     validate(inputName, inputVal)
@@ -49,6 +49,7 @@ const App = () => {
     setFormVals({ ...formVals, [inputName]: inputVal})
   }
   
+  //Submit Form
   const submitForm = () =>{
     const newOrder = {
       //text
@@ -68,8 +69,7 @@ const App = () => {
       postNewOrder(newOrder)
   }
 
-  
-
+  //Post
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
@@ -87,7 +87,7 @@ const App = () => {
   }
   
   
-  //ERRORS
+  //Validation Station//
   const validate = (name, value) => {
     yup.reach(schema, name)
       .validate(value)
@@ -98,15 +98,14 @@ const App = () => {
       )
   }
 
-    //TODO: set disabled
-    //!for the disabled form submit
-    useEffect(() => {
-      schema.isValid(formVals)
-      .then(valid =>{
-        setDisabled(!valid)
-      })
-      .finally(() => ('cleaning'))
-    }, [formVals])
+  //Disable submit button if the inputs needed are not there
+  useEffect(() => {
+    schema.isValid(formVals)
+    .then(valid =>{
+      setDisabled(!valid)
+    })
+    .finally(() => ('cleaning'))
+  }, [formVals])
 
     return (
     <div className="App">
@@ -132,12 +131,11 @@ const App = () => {
           />
           {!!pizzaOrder &&
             pizzaOrder.map(pizza =>{
-              return <Cart key={pizza.id} pizza={pizza}/>
+              return (
+              <Cart key={pizza.id} pizza={pizza}/>
+              )
             })
           }
-          
-          
-          {/* map though everything but the names ??*/}
       </Route>
     </div>
   );
