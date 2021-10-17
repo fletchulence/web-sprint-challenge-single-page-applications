@@ -102,9 +102,14 @@ const PizzaForm = (props) =>{
          </div>
 
 
-         <label>
-            <button id='order-button' type='submit' name='submitBtn' disabled={disabled}> Add to Order </button>
-         </label>
+            <button 
+               id='order-button' 
+               type='submit' 
+               name='submitBtn' 
+               disabled={disabled}
+               onClick={() =>{<Link to='/cart'/>}}
+               > Add to Order </button>
+         
       </form>
    )
 }

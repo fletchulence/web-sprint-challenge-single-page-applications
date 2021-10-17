@@ -3,6 +3,8 @@ import React from "react";
 export default function Cart (props) {
    const { pizza } = props
 
+
+
    return(
       <div className='myCart'>
          <p>{pizza.name}</p>

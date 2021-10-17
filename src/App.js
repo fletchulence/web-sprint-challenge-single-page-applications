@@ -16,14 +16,14 @@ import * as yup from 'yup';
 import schema from './validation/formSchema'
 
 const initialFormVals = {
-  name: 'david',
-  size: 'medium',
+  name: '',
+  size: '',
   //toppings
   pepperoni: false,
-  olives: true,
+  olives: false,
   chicken: false,
   pineapple: false,
-  special: 'no cheese',
+  special: '',
 }
 
 const initialFormErrors = {
@@ -118,7 +118,7 @@ const App = () => {
         <Home />
       </Route>
       <Route path='/confirmation'>
-        <Confirmation pizza = { pizzaOrder } />
+        <Confirmation pizza = {pizzaOrder} />
       </Route>
       <Route path='/cart'>
         {pizzaOrder &&
