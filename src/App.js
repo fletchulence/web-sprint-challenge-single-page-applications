@@ -9,20 +9,21 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import PizzaForm from './components/PizzaForm';
 import Cart from './components/Cart';
+import Confirmation from './components/Confirmation';
 
 // import schema
 import * as yup from 'yup';
 import schema from './validation/formSchema'
 
 const initialFormVals = {
-  name: '',
-  size: '',
+  name: 'david',
+  size: 'medium',
   //toppings
   pepperoni: false,
-  olives: false,
+  olives: true,
   chicken: false,
   pineapple: false,
-  special: '',
+  special: 'no cheese',
 }
 
 const initialFormErrors = {
@@ -64,8 +65,8 @@ const App = () => {
       //text for special instructinos
       special: formVals.special.trim(),
     }
-    // console.log(newOrder)
-    postNewOrder(newOrder)
+      setPizzaOrder(pizzaOrder.concat(newOrder))    
+      postNewOrder(newOrder)
   }
 
   // useEffect(() =>{
@@ -116,7 +117,15 @@ const App = () => {
       <Route exact path='/'>
         <Home />
       </Route>
+      <Route path='/confirmation'>
+        <Confirmation pizza = { pizzaOrder } />
+      </Route>
       <Route path='/cart'>
+        {pizzaOrder &&
+          pizzaOrder.map(pizza =>{
+            return <Cart key={pizza.id} pizza={pizza}/>
+          })
+        }
       </Route>
       <Route path='/pizza'>
         <PizzaForm
@@ -126,7 +135,7 @@ const App = () => {
           formErrors={formErrors}
           disabled={disabled}
           />
-          {pizzaOrder &&
+          {!!pizzaOrder &&
             pizzaOrder.map(pizza =>{
               return <Cart key={pizza.id} pizza={pizza}/>
             })
