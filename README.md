@@ -37,9 +37,6 @@ Demonstrate your understanding of this week's concepts by answering the followin
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
 
     - useRouteMatch is particularly helpful whilst matching <Links> to their <Routes> within Component urls. Let's say (in the case of this project), if i did the stretch and wanted to pass around more props and more Links to more Components, useRouteMatch would have allowed me to to this with more fluidity. useRouteMatch takes a URL and a PATH as arguments and matches (as in the name) them together easily. These are then matched to the current url, so that we dont have to type and retype.
-    
-    useParams is used for if i wanted to allow one person's the opportunity to order multiple pizzas under their name (singular). If i would have done the stretch, (i am too scared to break things anymore with this test, but..) I would have gone about this in such a way as to create a "/cart/:${pizzaOrder.name}" which would provide a change in url endpoint based on their name input. 
-    This way if Terry wanted to order multiple pizzas, we would see his pizzas in "{url}/cart/Terry" and if Tim wanted to order his own, we would see ".../cart/:Tim" in the url. I could accomplish this using useRouteMatch in order to bring me dynamic url matching.
 
 
 1. How would you explain form validation to someone who has never programmed before?
