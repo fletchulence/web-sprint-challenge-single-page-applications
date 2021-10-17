@@ -9,7 +9,6 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import PizzaForm from './components/PizzaForm';
 import Cart from './components/Cart';
-import Confirmation from './components/Confirmation';
 
 // import schema
 import * as yup from 'yup';
@@ -65,19 +64,18 @@ const App = () => {
       //text for special instructinos
       special: formVals.special.trim(),
     }
-      setPizzaOrder(pizzaOrder.concat(newOrder))    
+      // setPizzaOrder(pizzaOrder.concat(newOrder))    
       postNewOrder(newOrder)
   }
 
-  // useEffect(() =>{
-  //   getPizza()
-  // }, [])  //! MAY HAVE TO DO THIS
+  
 
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
       console.log(res.data)
-      setPizzaOrder([...pizzaOrder, res.data])
+      // setPizzaOrder([...pizzaOrder, res.data])
+      setPizzaOrder(pizzaOrder.concat(res.data))
     })
     .catch(err => {
       console.error(err)
@@ -117,11 +115,8 @@ const App = () => {
       <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/confirmation'>
-        <Confirmation pizza = {pizzaOrder} />
-      </Route>
       <Route path='/cart'>
-        {pizzaOrder &&
+        {!!pizzaOrder &&
           pizzaOrder.map(pizza =>{
             return <Cart key={pizza.id} pizza={pizza}/>
           })
