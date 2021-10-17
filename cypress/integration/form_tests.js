@@ -6,7 +6,7 @@ describe('Lambda Eats App', () =>{
 
    const nameInput = () => cy.get('input[id=name-input]');
    const specialT = () => cy.get('input[id=special-text]');
-   const sizeDrop = () => cy.get('input[id=size-dropdown]');
+   const sizeDrop = () => cy.get('select[id=size-dropdown]');
    // const toppings = () => cy.get('div[class=toppings]');
    const submitBtn = () => cy.get('button[id=order-submit]');
 
@@ -51,16 +51,38 @@ describe('Lambda Eats App', () =>{
       it('can select peps, olives, chicken, and pineapple', () => {
          cy.get('input[name=pepperoni]').should('not.have.value');
          cy.get('input[name=pepperoni]').check()
-            .should('have.value', 'on');
+         .should('have.value', 'on');
          cy.get('input[name=pepperoni]').should('not.have.value');
          cy.get('input[name=olives]').check()
-            .should('have.value', 'on');
+         .should('have.value', 'on');
          cy.get('input[name=chicken]').should('not.have.value');
          cy.get('input[name=chicken]').check()
-               .should('have.value', 'on');
+         .should('have.value', 'on');
          cy.get('input[name=pineapple]').should('not.have.value');
          cy.get('input[name=pineapple]').check()
-               .should('have.value', 'on');
+         .should('have.value', 'on');
+      })
+   })
+   
+   describe('Form should submit', () =>{
+      it('Submit button is disabled without Name and Size filled', () => {
+         submitBtn().should('be.disabled');
+         specialT().type('gluten free');
+         cy.get('input[name=pepperoni]').check()
+         cy.get('input[name=olives]').check()
+         cy.get('input[name=chicken]').check()
+         cy.get('input[name=pineapple]').check()
+         submitBtn().should('be.disabled');
+      })
+      it('Submit button becomes clickable when size and Name are filled', () => {
+         nameInput().type('Tony Stark');
+         submitBtn().should('be.disabled')
+         sizeDrop().select('Small')
+         submitBtn().should('not.be.disabled')
+         sizeDrop().select('Large')
+         submitBtn().should('not.be.disabled')
+         sizeDrop().select('Medium')
+         submitBtn().should('not.be.disabled')
       })
    })
 
