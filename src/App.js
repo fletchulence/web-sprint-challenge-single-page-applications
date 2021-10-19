@@ -73,7 +73,7 @@ const App = () => {
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder)
     .then(res=>{
-      console.log(res.data)
+      // console.log(res.data)
       // setPizzaOrder([...pizzaOrder, res.data])
       setPizzaOrder(pizzaOrder.concat(res.data))
     })
